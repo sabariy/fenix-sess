@@ -32,6 +32,11 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(__dirname));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
 app.post('/pair', async (req, res) => {
   const { phone, mongoUrl, dbName } = req.body
